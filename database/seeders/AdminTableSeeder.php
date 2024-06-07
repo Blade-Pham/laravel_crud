@@ -16,7 +16,7 @@ class AdminTableSeeder extends Seeder
     {
         DB::table('admins')->insert([
             [
-                'email' => 'khanamdev@gmail.com',
+                'email' => 'ducanh@gmail.com',
                 'first_name' => 'Admin',
                 'last_name' => '1',
                 'password' => Hash::make('12345678'),

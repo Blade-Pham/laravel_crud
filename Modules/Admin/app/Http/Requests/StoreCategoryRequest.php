@@ -4,7 +4,7 @@ namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,11 +12,7 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:100',
-            'type' => 'required|max:100',
-            'code' => 'required|max:10',
-            'price' => 'required|numeric',
-
+            'name' =>'required',
         ];
     }
 

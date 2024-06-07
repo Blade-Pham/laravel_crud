@@ -6,9 +6,9 @@
  * Time: 10:21
  */
 
-namespace App\Repositories\Product;
+namespace App\Repositories\Category;
 
-interface ProductRepositoryInterface
+interface CategoryRepositoryInterface
 {
     public function store($data);
 
@@ -16,7 +16,7 @@ interface ProductRepositoryInterface
 
     public function update($data, $id);
 
-    public function getList($dataSearch);
+    public function getList();
 
     public function delete($id);
 }

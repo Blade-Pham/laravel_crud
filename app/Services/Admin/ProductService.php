@@ -29,10 +29,11 @@ class ProductService
             'name' => $data['name'],
             'price' => $data['price'],
             'type' => $data['type'],
+            'category'=>$data['category'],
             'description' => $data['description'],
             'created_at' => now(),
             'updated_at' => now(),
-            'admin_id' => 1,
+            'admin_id' => "2"
         ];
         return $this->productRepository->store($dataStore);
     }
@@ -58,7 +59,7 @@ class ProductService
 
     public function getAll()
     {
-        return $this->productRepository->getList();
+        return $this->productRepository->getList(request()->all());
     }
 
     public function delete($id)

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm
- * User: Kha Nam (Andrew Nguyen)
- * Date: 25/05/2024
- * Time: 10:21
- */
+
 
 namespace App\Repositories\Product;
 
@@ -36,9 +31,20 @@ class ProductRepository implements ProductRepositoryInterface
         return $this->productModel->where('id', $id)->update($data);
     }
 
-    public function getList()
+    public function getList($dataSearch)
     {
-        return $this->productModel->get();
+        $data= $this->productModel->with(['createBy']);
+        if(!empty($dataSearch['name'])){
+            $data=$data->where('name', 'like', '%'.$dataSearch['name'].'%');
+        }
+        if(!empty($dataSearch['code'])){
+            $data=$data->where('code', $dataSearch['code']);
+        }if(!empty($dataSearch['admin_id'])){
+            $data=$data->where('admin_id', $dataSearch['admin_id']);
+        }if(!empty($dataSearch['category_name'])){
+            $data=$data->where('category', $dataSearch['category_name']);}
+
+        return $data->get();
     }
 
     public function delete($id)

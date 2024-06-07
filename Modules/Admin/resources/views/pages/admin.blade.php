@@ -6,4 +6,6 @@
  * Time: 10:50
  */
 ?>
-<a href="{{route('admin.logout')}}">Logout here</a>
+@extends('admin::layouts.master')
+
+{{-- <a href="{{route('admin.logout')}}">Logout here</a> --}}

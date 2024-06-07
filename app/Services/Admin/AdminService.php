@@ -24,4 +24,8 @@ class AdminService
 
         $this->adminRepository->store($data);
     }
+    public function getAll()
+    {
+        return $this->adminRepository->all();
+    }
 }

@@ -22,11 +22,12 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('static/css/adminlte.css')}}">
 </head>
-<body class="hold-transition login-page">
-@yield("content")
+<body class="sidebar-mini sidebar-collapse" style="height: auto">
+
 <!-- /.login-box -->
-
-
+    @include('admin::components.aside_admin')
+    @include('admin::components.navbar_admin')
+    @yield('content')
 <!-- jQuery -->
 <script src="{{asset('static/js/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
@@ -36,6 +37,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('static/js/adminlte.min.js')}}"></script>
 @yield("extra-js")
+@yield("scripts")
 </body>
 </html>
 

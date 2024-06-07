@@ -4,21 +4,30 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\Admin\ProductService;
+use App\Services\Admin\AdminService;
+use App\Services\Admin\CategoryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Session\Store;
 use Modules\Admin\Http\Requests\StoreProductRequest;
 
+
 class ProductController extends Controller
 {
 
     private $productService;
+    private $adminService;
+    private $categoryService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, AdminService $adminService, CategoryService $categoryService)
     {
         $this->productService = $productService;
+        $this->adminService = $adminService;
+        $this->categoryService=$categoryService;
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -26,7 +35,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->getAll();
-        return view('admin::pages.product.index', compact('products'));
+        $admin = $this->adminService->getAll();
+        $category=$this->categoryService->getAll();
+        return view('admin::pages.product.index', compact('products','admin','category'));
     }
 
     /**
@@ -34,7 +45,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin::pages.product.create');
+        $category=$this->categoryService->getAll();
+        return view('admin::pages.product.create',compact('category'));
     }
 
     /**
@@ -43,6 +55,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request): RedirectResponse
     {
         $productId = $this->productService->store($request->all());
+
         //  Sau khi tao xong, thi se tro ve trang edit
         return  redirect()->route('admin.product.index')->with('success', 'Product created successfully');
     }
@@ -71,7 +84,7 @@ class ProductController extends Controller
     {
         $statusUpdate = $this->productService->update( $request->all(), $id);
         if ($statusUpdate) {
-            return redirect()->back();
+            return redirect()->route('admin.product.index');
         } else {
             dd("Update Failed");
         }
